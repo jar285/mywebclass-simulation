@@ -1,10 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const HTML5Validator = require('html5-validator');
 
-test('HTML Validation Test', async ({ context, page }) => {
-  // Add the html5-validator library to the page context
-  await context.addInitScript({ content: `window.HTML5Validator = ${HTML5Validator.toString()}` });
-
+test('HTML Validation Test', async ({ page }) => {
   // Navigate to the website to test
   await page.goto('http://localhost:3000');
 
@@ -24,3 +20,4 @@ test('HTML Validation Test', async ({ context, page }) => {
 
   expect(validationErrors).toHaveLength(0);
 });
+
