@@ -10,4 +10,3 @@ test('Landing Page Load Time Test', async ({ page }) => {
   const loadTime = Date.now() - startTime;
   expect(loadTime).toBeLessThanOrEqual(3000);
 });
-In this ex
