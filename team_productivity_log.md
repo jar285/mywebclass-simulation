@@ -7,7 +7,7 @@
 | Create Project Management Report | 3 | ...... | In progress | Annerys| 3/16/2023 | | Documentation | |
 | Project Analysis Report | 3 | ... | Done | Annerys/Greys | 3/18/2023 | 3/2/2023 | Documentation | |
 | DevOps and Site Reliability Report | 3 | .....| In progress | Greys | 3/18/2023 | | Documentation | |
-| Conduct Legal Research & Implement Changes | 2 | ......| Done | Annerys | 3/18/2023 | 3/22/2023 | Documentation | |
+| Conduct Legal Research & Implement Changes | 2 | ......| Done | Annerys | 3/18/2023 | 3/26/2023 | Documentation | |
 | Perform Testing/Resolve Issues for Changes | 1 | .....| process | jesus | 3/18/2023 |  | Documentation | |
 | Conduct Research & Implement Features | 2 | ..... | process | Annerys | 3/18/2023 | 3/25/2023 | Documentation | |
 | Perform Testing/Resolve Issues for Features | 1 | ...... | process | jesus | 3/18/2023 |  | Documentation | |
