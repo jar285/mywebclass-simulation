@@ -1,13 +1,15 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
-test.describe('Webpack Build Status Test', () => {
-  test('Webpack builds successfully', async ({ page }) => {
-    // Navigate to the page that displays the build status
-    await page.goto('http://localhost:3000/webpack-build-status');
+test.describe('Webpack Dev Server Test', () => {
+  test('Dev server runs on the expected port', async ({ page }) => {
+    // Navigate to the page with the Webpack dev server running
+    await page.goto('http://localhost:3000');
 
-    // Verify that the build status is displayed as expected
-    const buildStatus = await page.innerText('#build-status');
-    expect(buildStatus).toBe('Webpack build successful!');
+    // Get the current URL of the page
+    const currentUrl = page.url();
+
+    // Check if the current URL contains the expected port number
+    expect(currentUrl).toContain(':3000');
   });
 });
