@@ -18,4 +18,4 @@ test('Privacy policy should follow GDPR guidelines', async ({ page }) => {
   const includesDataSubjectRights = policyText.includes('rights')
   expect(includesDataSubjectRights).toBeTruthy()
 })
-Footer
+
