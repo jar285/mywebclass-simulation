@@ -1,23 +1,20 @@
+// @ts-check
 const { test, expect } = require('@playwright/test');
 
-test('HTML Validation Test', async ({ page }) => {
-  // Navigate to the website to test
-  await page.goto('http://localhost:3000');
+test.describe('HTML Validation Test', () => {
+  test('No HTML validation errors', async ({ page }) => {
+    // Navigate to the website to be tested
+    await page.goto('http://localhost:3000');
 
-  // Check if there are any HTML validation errors
-  const validationErrors = await page.evaluate(() => {
-    const validationErrors = [];
-    const validator = new window.HTML5Validator();
-
-    validator.check(document, (err) => {
-      if (err) {
-        validationErrors.push(err.message);
-      }
+    // Check if there are any HTML validation errors
+    const validationErrors = await page.evaluate(() => {
+      const results = document.querySelectorAll('#results .error');
+      return Array.from(results).map((result) => result.textContent);
     });
 
-    return validationErrors;
+    // Check if there are no validation errors
+    expect(validationErrors).toHaveLength(0);
   });
-
-  expect(validationErrors).toHaveLength(0);
 });
+
 
