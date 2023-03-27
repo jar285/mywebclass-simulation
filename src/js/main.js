@@ -121,3 +121,20 @@ function setLanguage () {
   // Set the 'lang' attribute of the 'html' tag to the supported language
   document.documentElement.setAttribute('lang', supportedLang)
 }
+
+const express = require('express');
+const app = express();
+
+// Set up routes for different languages
+app.get('/en', (req, res) => {
+  res.send('<html><body><h1>Hello World!</h1></body></html>');
+});
+
+app.get('/es', (req, res) => {
+  res.send('<html><body><h1>Hola Mundo!</h1></body></html>');
+});
+
+// Start the server
+const server = app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
