@@ -1,34 +1,11 @@
-const { chromium } = require('@playwright/test');
+const { test, expect } = require('@playwright/test')
 
-(async () => {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  const navigationPromise = page.waitForNavigation();
+test('Privacy policy contains target words', async ({ page }) => {
+  await page.goto('http://localhost:3000/privacy.html')
+  const privacyPolicyText = await page.textContent('#bodyOfPrivacyPolicy')
 
-  // Load the website
-  await page.goto('https://mywebclass.org');
-
-
-  // Check that the website has no broken links
-  const links = await page.$$eval('a', links => links.map(link => link.href));
-  const responses = await Promise.all(links.map(link => page.goto(link, {waitUntil: 'domcontentloaded'}).catch(e => e)));
-  const errorResponses = responses.filter(response => response instanceof Error);
-  expect(errorResponses.length).toBe(0);
-
-  // Check that the website has appropriate meta tags
-  const title = await page.title();
-  expect(title).toBeTruthy();
-
-  const description = await page.$eval('meta[name="description"]', el => el.content);
-  expect(description).toBeTruthy();
-
-  // Simulate interacting with the site
-  // ...
-
-  // Collect metrics
-  const metrics = await page.metrics();
-  console.log(metrics);
-
-  // Close the browser
-  await browser.close();
-})();
+  expect(privacyPolicyText).toContain('Google Analytics')
+  expect(privacyPolicyText).toContain('protect')
+  expect(privacyPolicyText).toContain('collect')
+  expect(privacyPolicyText).toContain('legal')
+})
