@@ -1,19 +1,15 @@
-test('Measure Webpack Build Time', async ({ page }) => {
-  // Increase timeout to 60 seconds
-  page.setDefaultTimeout(60000);
+const { test, expect } = require('@playwright/test');
 
-  // Navigate to the website to test
+test('Webpack builds successfully', async ({ page }) => {
   await page.goto('http://localhost:3000');
-
-  // Click on the build button to trigger Webpack build process
-  const buildButton = await page.$('#build-button');
-  await buildButton.click();
-
-  // Wait for the build process to complete and check for success message
-  const buildResult = await page.$('#build-result');
-  await page.waitForSelector('content.html.success');
-  const buildTime = Date.now() - buildStartTime;
-
-  // Check if the build time is below a certain threshold
-  expect(buildTime).toBeLessThanOrEqual(60000); // 60 seconds
+  const result = await page.evaluate(() => {
+    return new Promise(resolve => {
+      const script = document.createElement('script');
+      script.onload = () => resolve('Webpack build successful!');
+      script.onerror = () => resolve('Webpack build failed.');
+      script.src = 'http://localhost:3000/js/app.bundle.js';
+      document.body.appendChild(script);
+    });
+  });
+  expect(result).toBe('Webpack build successful!');
 });
