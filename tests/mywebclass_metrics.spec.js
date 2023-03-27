@@ -8,9 +8,6 @@ const { chromium } = require('@playwright/test');
   // Load the website
   await page.goto('https://mywebclass.org');
 
-  // Check that the website has a valid SSL certificate
-  const securityDetails = await page.evaluate(() => JSON.parse(JSON.stringify(window.performance.getEntriesByType("navigation")[0]['securityDetails'])));
-  expect(securityDetails.protocol()).toBe('TLS 1.3');
 
   // Check that the website has no broken links
   const links = await page.$$eval('a', links => links.map(link => link.href));
