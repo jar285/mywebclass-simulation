@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Webpack Build Time Test', async ({ page }) => {
   // Navigate to the website to test
-  await page.goto('http://localhost:8080');
+  await page.goto('http://localhost:3000');
 
   // Measure the time it takes for the Webpack bundle to be built
   const buildStartTime = Date.now();
