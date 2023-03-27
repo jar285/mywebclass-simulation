@@ -12,7 +12,7 @@
 |the privacy content test| 2 | [ privacy content test](https://github.com/jar285/mywebclass-simulation/pull/41)| done | Annerys | 3/18/2023 | 3/2/2023 | Documentation | |
 | Perform Testing/Resolve Issues for Features | 1 | ...... | process | jesus | 3/18/2023 |  | Documentation | |
 | Create Product Development Report | 3 |......| In Progress | Greys | 3/18/2023| | Documentation| | 
-| SEO Research & Implementation | 2 |.....| Done | jesus | 3/18/2023 | | Feature | | 
-| SEO Testing | 1 | ......| Todo |jesus| 3/18/2023 | | Feature | | 
+| SEO Research & Implementation | 2 |[SEO Research & Implemtation](https://github.com/jar285/mywebclass-simulation/pull/51)| Done | Jesus | 3/18/2023 | | Feature | | 
+| SEO Testing | 1 | ......| Done |jesus| 3/18/2023 | | Feature | | 
 | Develop Content Template | 5 | .....| Todo | Greys | 3/18/2023 | | Feature | | 
 | Develop Homepage | 5 | | Todo | Greys| 3/18/2023 | | Feature | | 
