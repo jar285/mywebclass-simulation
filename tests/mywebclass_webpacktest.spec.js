@@ -7,8 +7,8 @@ test('Webpack Build Time Test', async ({ page }) => {
 
   // Measure the time it takes for the Webpack bundle to be built
   const buildStartTime = Date.now();
-  await page.click('#build-button');
-  await page.waitForSelector('#build-status.success');
+  await page.click('content.html');
+  await page.waitForSelector('content.html.success');
   const buildTime = Date.now() - buildStartTime;
 
   // Check if the build time is below a certain threshold
