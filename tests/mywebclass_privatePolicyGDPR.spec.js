@@ -1,3 +1,4 @@
+
 // @ts-check
 const { test, expect } = require('@playwright/test')
 
@@ -18,4 +19,3 @@ test('Privacy policy should follow GDPR guidelines', async ({ page }) => {
   const includesDataSubjectRights = policyText.includes('rights')
   expect(includesDataSubjectRights).toBeTruthy()
 })
-
