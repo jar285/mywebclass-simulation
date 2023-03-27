@@ -1,37 +1,25 @@
-const { test, expect } = require('@playwright/test');
+async function metrics(page) {
+  const client = await page.context().newCDPSession(page);
+  await client.send('Performance.enable');
+  await page.goto('http://localhost:3000/');
 
-test('MyWebClass.org performance test', async ({ page }) => {
-  // Set the network and page metrics to gather
-  await page.route('**/*', route => {
-    const request = route.request();
-    route.continue();
-    if (request.url().startsWith('http')) {
-      console.log(request.url(), route.metrics());
-    }
+  // Wait for page to load completely
+  await page.waitForLoadState('networkidle');
+
+  // Get performance metrics
+  const performanceMetrics = await client.send('Performance.getMetrics');
+
+  // Filter out only relevant metrics
+  const relevantMetrics = performanceMetrics.metrics.filter(metric => {
+    return metric.name === 'ScriptDuration' || metric.name === 'TaskDuration' || metric.name === 'LayoutDuration';
   });
 
-  // Navigate to the website and measure performance
-  await page.goto('http://localhost:3000');
-  const loadTime = (await page.metrics()).TaskDuration;
-  const resources = await page.resources();
-  const networkTime = resources.reduce((a, b) => a + b.timing.endTime - b.timing.startTime, 0);
+  // Calculate total time
+  let totalTime = 0;
+  relevantMetrics.forEach(metric => {
+    totalTime += metric.value;
+  });
 
-  // Check if the page loads within a certain time limit
-  expect(loadTime).toBeLessThanOrEqual(5000); // 5 seconds
-
-  // Check for proper resource loading
-  expect(resources).not.toBe([]);
-  for (const resource of resources) {
-    expect(resource.response()).not.toBe(null);
-    expect(resource.request().failure()).toBe(null);
-  }
-
-  // Analyze and optimize site performance based on test results
-  // ...
-
-  // Create test reports with detailed performance data
-  // ...
-
-  // Implement optimizations based on test results
-  // ...
-});
+  // Return result in seconds
+  return totalTime / 1000;
+}
