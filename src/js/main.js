@@ -36,7 +36,7 @@ function createPrivacyModal () {
             <p>Do you agree to our Privacy Policy?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Disagree</button>
+            <button type="button" class="btn btn-secondary"  id="disagreeBtn" data-bs-dismiss="modal" >Disagree</button>
             <button type="button" class="btn btn-primary" id="agreeButton">Agree</button>
           </div>
         </div>
