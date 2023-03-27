@@ -2,6 +2,8 @@
 const { test, expect } = require('@playwright/test')
 
 test.describe('CI/CD Pipeline - Performance Test', () => {
+  let logs = []
+
   test.beforeEach(async ({ page }) => {
     // Navigate to the website to test
     await page.goto('http://localhost:3000')
@@ -17,11 +19,17 @@ test.describe('CI/CD Pipeline - Performance Test', () => {
     expect(loadTime).toBeLessThanOrEqual(5000) // 5 seconds
   })
 
-  test.afterAll(async ({ browser }) => {
-    // Record browser logs for debugging purposes
-    const logs = await browser.context().logs('browser')
+  test.afterEach(async ({ page }) => {
+    // Record console logs for debugging purposes
+    logs.push(...await page.evaluate(() => {
+      return window.__logs__ || []
+    }))
+  })
+
+  test.afterAll(async () => {
     console.log(logs)
   })
 })
+
 
 
