@@ -3,18 +3,19 @@ const { chromium } = require('playwright');
 
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  const context = await browser.newContext();
+  const page = await context.newPage();
 
-  // Navigate to the website
   await page.goto('http://localhost:3000/content.html');
 
-  // Check if the email subscription box exists
-  const subscriptionBox = await page.$('input[name="emailSubscription"]');
-  if (subscriptionBox) {
-    console.log('Email subscription box exists');
-  } else {
-    console.log('Email subscription box does not exist');
-  }
+  const form = await page.$('form');
+  const inputField = await form.$('input[name="emailSubscription"]');
+  const subscribeButton = await form.$('button[type="button"]');
+
+  expect(form).not.toBeNull();
+  expect(inputField).not.toBeNull();
+  expect(subscribeButton).not.toBeNull();
 
   await browser.close();
 })();
+
