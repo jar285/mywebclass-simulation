@@ -1,6 +1,5 @@
 // @ts-check
-const { chromium } = require('playwright');
-
+const { test, expect } = require('@playwright/test')
 (async () => {
   const browser = await chromium.launch();
   const context = await browser.newContext();
