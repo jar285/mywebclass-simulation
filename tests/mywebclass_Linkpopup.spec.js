@@ -8,4 +8,3 @@ test('Privacy Policy Link Test', async ({ page }) => {
   const privacyPolicyLink = await popup.$('a[href="privacy.html"]')
   expect(privacyPolicyLink).not.toBeNull()
 })
-}, { timeout: 60000 })
