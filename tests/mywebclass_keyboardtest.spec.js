@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 
 test('Keyboard navigation test', async ({ page }) => {
   // Navigate to the page you want to test
-  await page.goto('http://localhost:3000');
+  await page.goto('http://localhost:3000/home.html');
 
   // Check if button exists before attempting to focus on it
   const button = await page.$('#my-button');
