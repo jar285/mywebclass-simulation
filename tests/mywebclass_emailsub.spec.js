@@ -1,20 +1,18 @@
 // @ts-check
-const { test, expect } = require('@playwright/test')
-(async () => {
-  const browser = await chromium.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
+const { test, expect } = require('@playwright/test');
 
-  await page.goto('http://localhost:3000/content.html');
+test.describe('Email Subscription Form Test', () => {
+  test('Verify email subscription form', async ({ page }) => {
+    // Navigate to the web page
+    await page.goto('http://localhost:3000/content.html');
 
-  const form = await page.$('form');
-  const inputField = await form.$('input[name="emailSubscription"]');
-  const subscribeButton = await form.$('button[type="button"]');
+    // Check if there is a form element with an input field with name attribute "emailSubscription"
+    const emailInput = await page.$('form input[name="emailSubscription"]');
+    expect(emailInput).toBeTruthy();
 
-  expect(form).not.toBeNull();
-  expect(inputField).not.toBeNull();
-  expect(subscribeButton).not.toBeNull();
-
-  await browser.close();
-})();
+    // Check if there is a button with type attribute "button"
+    const subscribeButton = await page.$('form button[type="button"]');
+    expect(subscribeButton).toBeTruthy();
+  });
+});
 
