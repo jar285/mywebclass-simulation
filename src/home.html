@@ -30,7 +30,7 @@
 
             <div class="container">
                 <a class="navbar-brand" href="/">MyWebClass.org</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button  class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon" aria-hidden="true"></span>
@@ -102,7 +102,8 @@
                     <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                         <label for="newsletter1" class="visually-hidden">Email address</label>
                         <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
+                        <button id="my-button" onclick="document.getElementById('my-message').style.display='block'" class="btn btn-primary" type="button">Subscribe</button>
+                        <p id="my-message" style="display: none;">You going to start!</p>
                     </div>
                 </form>
             </div>
