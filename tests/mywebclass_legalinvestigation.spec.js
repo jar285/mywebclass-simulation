@@ -1,18 +1,29 @@
+// Import Playwright libraries and assertion library
 const { test, expect } = require('@playwright/test');
 
-test('Legal requirements are met', async ({ page }) => {
-  // Navigate to the website.
-  await page.goto('https://example.com');
+// Define the test
+test('Should display a consent banner and allow user to opt-in or out', async ({ page }) => {
+  // Navigate to the website
+  await page.goto('http://localhost:3000');
 
-  // Make necessary changes to comply with legal requirements.
-  // ...
+  // Assert that the consent banner is visible
+  const consentBanner = await page.waitForSelector('.consent-banner');
+  expect(consentBanner).not.toBeNull();
 
-  // Check that the changes have been implemented successfully.
-  const legalInvestigation = await page.evaluate(() => {
-    // Code to check legal compliance, such as verifying the presence of a consent banner or checking for compliant data collection practices.
-    // ...
-  });
+  // Assert that the opt-in and opt-out buttons are visible
+  const optInButton = await consentBanner.waitForSelector('.opt-in');
+  expect(optInButton).not.toBeNull();
 
-  // Expect the legal investigation to pass.
-  expect(legalInvestigation).toBeTruthy();
+  const optOutButton = await consentBanner.waitForSelector('.opt-out');
+  expect(optOutButton).not.toBeNull();
+
+  // Click the opt-in button and assert that data collection is enabled
+  await optInButton.click();
+  const dataCollectionEnabled = await page.evaluate(() => window.dataCollectionEnabled);
+  expect(dataCollectionEnabled).toBe(true);
+
+  // Click the opt-out button and assert that data collection is disabled
+  await optOutButton.click();
+  const dataCollectionDisabled = await page.evaluate(() => window.dataCollectionEnabled);
+  expect(dataCollectionDisabled).toBe(false);
 });
